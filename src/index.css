@@ -1,0 +1,1166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Token
+   ------------------------------------------------------------------ */
+:root {
+  --ink: #000000;
+  --carta: #f6f6f2;
+  --cemento: #e6e6e6;
+  --line: #000000;
+  --bordo: 4px;
+  --pad: clamp(20px, 3vw, 40px);
+  --font-display: 'Bowlby One', Impact, 'Arial Black', sans-serif;
+  --font-body: Archivo, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--carta);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  user-select: none;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+.contenitore {
+  width: 100%;
+  max-width: 1376px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  position: relative;
+  z-index: 2;
+}
+
+:focus-visible {
+  outline: 4px solid var(--line);
+  outline-offset: 5px;
+}
+
+.salta {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  background: #000;
+  color: #fff;
+  padding: 10px 16px;
+  font-weight: 900;
+}
+.salta:focus {
+  top: 12px;
+}
+
+/* ------------------------------------------------------------------
+   Texture: retino halftone (asset Higgsfield, punti neri su trasparente)
+   ------------------------------------------------------------------ */
+.strato-retino {
+  position: absolute;
+  inset: 0;
+  background-image: var(--retino);
+  background-size: 760px;
+  background-repeat: repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+.strato-retino--tenue {
+  opacity: 0.06;
+}
+.strato-retino--forte {
+  opacity: 0.16;
+  background-size: 520px;
+}
+
+/* Contorno nero spesso + ombra netta sfalsata attorno agli oggetti scontornati */
+.contorno-ombra {
+  filter: drop-shadow(3px 0 0 var(--line)) drop-shadow(-3px 0 0 var(--line))
+    drop-shadow(0 3px 0 var(--line)) drop-shadow(0 -3px 0 var(--line))
+    drop-shadow(10px 10px 0 var(--line));
+}
+
+/* Bottone a pillola con bordo spesso */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 3px solid var(--line);
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 16px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 0 var(--line);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.pill:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--line);
+}
+.pill:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--line);
+}
+
+/* ------------------------------------------------------------------
+   HERO
+   ------------------------------------------------------------------ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  min-height: max(100svh, 720px);
+  overflow: hidden;
+  /* taglio netto, nessuna transizione di colore */
+  transition: none;
+  border-bottom: 6px solid #000;
+}
+
+.hero-nav {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--pad);
+}
+.wordmark {
+  font-size: 26px;
+  color: inherit;
+  text-decoration: none;
+  letter-spacing: 0;
+}
+
+.hero-titolo {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+  z-index: 5;
+  font-size: clamp(56px, 8.1vw, 150px);
+}
+.riga {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  padding-top: 0.06em;
+}
+.riga-1 {
+  top: 86px;
+  left: var(--pad);
+}
+.riga-2 {
+  bottom: 26px;
+  right: var(--pad);
+  text-align: right;
+}
+
+.hero-sotto {
+  position: absolute;
+  z-index: 6;
+  left: var(--pad);
+  bottom: 34px;
+  max-width: min(260px, 18vw);
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.palco {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: min(980px, 78vw);
+  height: min(58vh, 600px);
+}
+.palco-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 78%;
+  max-width: 640px;
+  margin-left: -39%;
+  margin-top: -27%;
+  pointer-events: none;
+}
+@media (min-width: 1260px) {
+  .palco-burst {
+    margin-left: -320px;
+    margin-top: -220px;
+  }
+}
+.palco-chiosco {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1100px;
+  pointer-events: none;
+}
+.chiosco-img {
+  height: 100%;
+  width: auto;
+  max-width: 60%;
+  object-fit: contain;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.badge-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.badge-posto {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  right: var(--right);
+  bottom: var(--bottom);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px 8px 8px;
+  border: var(--bordo) solid var(--line);
+  border-radius: 999px;
+  box-shadow: 6px 6px 0 0 var(--line);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.badge-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  padding: 4px;
+  background: #fff;
+  border: 3px solid var(--line);
+  border-radius: 999px;
+}
+.badge-nome {
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------------
+   GRIGLIA CATEGORIE
+   ------------------------------------------------------------------ */
+.griglia-sezione {
+  position: relative;
+  background: var(--carta);
+  padding: 150px 0 140px;
+}
+.strappo {
+  position: absolute;
+  z-index: 3;
+  top: -58px;
+  left: -4%;
+  width: 108%;
+  max-width: none;
+  height: 110px;
+  object-fit: fill;
+  transform: rotate(-1.4deg);
+  filter: drop-shadow(0 6px 0 #000);
+  pointer-events: none;
+}
+
+.griglia-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+.griglia-titolo {
+  margin: 0;
+  font-size: clamp(52px, 7vw, 112px);
+}
+.griglia-sotto {
+  max-width: 360px;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 28px;
+}
+
+.scheda {
+  position: relative;
+  border: var(--bordo) solid #000;
+  overflow: hidden;
+}
+.scheda-chiusa {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.scheda-media {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: var(--bordo) solid #000;
+  background: rgba(255, 255, 255, 0.22);
+}
+.scheda--riviste .scheda-media {
+  background: rgba(255, 255, 255, 0.08);
+}
+.scheda-img {
+  position: relative;
+  z-index: 1;
+  max-height: 78%;
+  max-width: 70%;
+  object-fit: contain;
+}
+.scheda-testo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 26px 26px;
+  flex: 1;
+}
+.scheda-titolo {
+  margin: 0;
+  font-size: clamp(28px, 2.6vw, 40px);
+}
+.scheda-breve {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  max-width: 34ch;
+}
+.scheda-apri {
+  margin-top: auto;
+  padding-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 16px;
+}
+.scheda-piu {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--line);
+  border-radius: 8px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.scheda-aperta {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 48px;
+  align-items: center;
+  padding: 56px 64px 56px 40px;
+  min-height: 520px;
+}
+.aperta-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+}
+.aperta-burst {
+  position: absolute;
+  width: 115%;
+  max-width: none;
+  left: -7%;
+  top: 50%;
+  margin-top: -40%;
+  pointer-events: none;
+}
+.aperta-img {
+  position: relative;
+  z-index: 1;
+  max-height: 400px;
+  max-width: 88%;
+  object-fit: contain;
+}
+.aperta-titolo {
+  margin: 0 0 22px;
+  font-size: clamp(44px, 5.4vw, 88px);
+}
+.aperta-lungo {
+  margin: 0 0 22px;
+  font-size: 21px;
+  font-weight: 600;
+  max-width: 52ch;
+  line-height: 1.4;
+}
+.aperta-voci {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.aperta-voci li {
+  position: relative;
+  padding-left: 30px;
+  font-weight: 800;
+  font-size: 18px;
+}
+.aperta-voci li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.32em;
+  width: 14px;
+  height: 14px;
+  background: var(--line);
+  transform: rotate(45deg);
+}
+.aperta-nota {
+  margin: 0 0 26px;
+  padding: 12px 14px;
+  border: 3px solid var(--line);
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 52ch;
+}
+.btn-secondario {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #fff;
+  color: #000;
+  border: var(--bordo) solid #000;
+  border-radius: 999px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 0 var(--line);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.btn-secondario:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 0 var(--line);
+}
+.btn-secondario:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 0 var(--line);
+}
+
+.chiudi {
+  position: absolute;
+  z-index: 5;
+  top: 22px;
+  right: 22px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: #000;
+  border: 5px solid #000;
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 0 #000;
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.chiudi:hover {
+  transform: translate(-2px, -2px) rotate(-6deg);
+  box-shadow: 8px 8px 0 0 #000;
+}
+.chiudi:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0 0 #000;
+}
+
+/* ------------------------------------------------------------------
+   DOVE SIAMO
+   ------------------------------------------------------------------ */
+.dove-sezione {
+  position: relative;
+  background: var(--cemento);
+  padding: 130px 0 170px;
+  border-top: 6px solid #000;
+  overflow: hidden;
+}
+.dove-griglia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.dove-titolo {
+  margin: 0 0 30px;
+  font-size: clamp(64px, 8.6vw, 140px);
+}
+.targa {
+  display: inline-block;
+  margin: 0 0 30px;
+  padding: 10px 30px 14px;
+  background: #fff;
+  border: 6px solid #000;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 7px #000, 8px 8px 0 0 #000;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: clamp(40px, 4.6vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transform: rotate(-2deg);
+}
+.dove-sotto {
+  max-width: 44ch;
+  margin: 0 0 40px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.btn-cta {
+  display: inline-block;
+  padding: 22px 40px 20px;
+  background: #ffcc00;
+  color: #000;
+  border: 5px solid #000;
+  border-radius: 18px;
+  font-size: clamp(26px, 2.6vw, 40px);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dove-mappa {
+  position: relative;
+}
+.mappa {
+  position: relative;
+  height: clamp(420px, 44vw, 600px);
+  border: 6px solid #000;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 14px 14px 0 0 #000;
+  background: #fff;
+}
+.mappa iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: grayscale(1) contrast(1.15);
+}
+.adesivo {
+  position: absolute;
+  z-index: 3;
+  top: -64px;
+  right: -46px;
+  width: 190px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+.adesivo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.adesivo span {
+  position: relative;
+  font-size: 22px;
+  color: #000;
+  text-align: center;
+  line-height: 0.95;
+  max-width: 90px;
+}
+
+/* ------------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------------ */
+.piede {
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  padding: 70px 0 34px;
+}
+.nastro {
+  transform: rotate(-2deg);
+  margin: 0 -40px;
+  border-top: 5px solid #fff;
+  border-bottom: 5px solid #fff;
+  background: #000;
+  overflow: hidden;
+  padding: 18px 0 12px;
+}
+.nastro-binario {
+  display: flex;
+  width: max-content;
+  animation: nastro 60s linear infinite;
+}
+.nastro-gruppo {
+  display: flex;
+  flex-shrink: 0;
+}
+.nastro-parola {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 1;
+  white-space: nowrap;
+}
+.nastro-punto {
+  color: #fff;
+  margin: 0 0.35em;
+}
+@keyframes nastro {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nastro-binario {
+    animation: none;
+  }
+}
+
+.piede-corpo {
+  padding-top: 80px;
+}
+.contatti {
+  margin-bottom: 90px;
+}
+.contatti-titolo {
+  margin: 0 0 28px;
+  font-size: clamp(36px, 4vw, 60px);
+}
+.contatti-lista {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 28px;
+}
+.piede a.contatto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 28px 26px;
+  color: #000;
+  text-decoration: none;
+  border: 4px solid #000;
+  outline: 3px solid #fff;
+  border-radius: 22px;
+  box-shadow: 8px 8px 0 0 #fff;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.piede a.contatto:hover {
+  color: #000;
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 0 #fff;
+}
+.piede a.contatto:active {
+  transform: translate(4px, 4px) scale(0.98);
+  box-shadow: 3px 3px 0 0 #fff;
+}
+.contatto--tel {
+  background: #ffcc00;
+}
+.contatto--mail {
+  background: #00ccff;
+}
+.contatto-etichetta {
+  font-weight: 900;
+  font-size: 16px;
+}
+.contatto-valore {
+  font-size: clamp(34px, 3.6vw, 56px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.contatto-valore--mail {
+  font-weight: 900;
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.piede-marchio {
+  margin: 0;
+  padding-bottom: 24px;
+  font-size: clamp(64px, 13.4vw, 196px);
+  line-height: 0.85;
+  border-bottom: 6px solid #fff;
+}
+.piede-riga {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-top: 22px;
+  font-weight: 800;
+}
+.piede-riga p {
+  margin: 0;
+}
+.piede-link {
+  display: flex;
+  gap: 28px;
+}
+.piede a {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+.piede a:hover {
+  color: #ffcc00;
+}
+.piede :focus-visible {
+  outline-color: #fff;
+}
+
+/* ------------------------------------------------------------------
+   SERVIZI
+   ------------------------------------------------------------------ */
+.strato-retino--chiaro {
+  filter: invert(1);
+  opacity: 0.12;
+}
+.servizi-sezione {
+  position: relative;
+  background: #000;
+  color: #fff;
+  padding: 130px 0 140px;
+  border-top: 6px solid #000;
+  overflow: hidden;
+  --line: #ffffff;
+}
+.servizi-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.servizi-titolo {
+  margin: 0;
+  font-size: clamp(56px, 7.6vw, 124px);
+}
+.servizi-sotto {
+  max-width: 380px;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+.servizi-griglia {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+.servizio {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px 28px 30px;
+  color: #000;
+  border: 4px solid #000;
+  outline: 3px solid #fff;
+  border-radius: 22px;
+}
+.servizio--largo {
+  grid-column: span 2 / span 2;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+.servizio-segno {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 0 #000;
+}
+.servizio--largo .servizio-segno {
+  width: 220px;
+  height: 150px;
+}
+.servizio-logo {
+  width: 84%;
+  height: auto;
+}
+.servizio-nome {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 2.1vw, 32px);
+  line-height: 0.95;
+}
+.servizio--largo .servizio-nome {
+  font-size: clamp(30px, 2.8vw, 44px);
+}
+.servizio-testo {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  max-width: 36ch;
+}
+.servizio-nota {
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 4px 10px;
+  border: 3px solid #000;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* ------------------------------------------------------------------
+   CHI SIAMO (foto + locandina)
+   ------------------------------------------------------------------ */
+.chi-sezione {
+  position: relative;
+  background: var(--carta);
+  padding: 140px 0 150px;
+  border-top: 6px solid #000;
+  overflow: hidden;
+}
+.chi-griglia {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 56px;
+  align-items: center;
+}
+.chi-foto {
+  position: relative;
+  margin: 0;
+  padding: 16px 16px 0;
+  background: #fff;
+  border: 4px solid #000;
+  box-shadow: 14px 14px 0 0 #000;
+}
+.chi-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1206 / 1161;
+  object-fit: cover;
+  border: 3px solid #000;
+}
+.chi-foto figcaption {
+  padding: 14px 4px 16px;
+  font-weight: 800;
+  font-size: 16px;
+}
+.nastro-adesivo {
+  position: absolute;
+  z-index: 2;
+  width: 150px;
+  height: 40px;
+  background: rgba(255, 204, 0, 0.85);
+  border: 3px solid #000;
+}
+.nastro-adesivo--sx {
+  top: -18px;
+  left: -34px;
+  transform: rotate(-24deg);
+}
+.nastro-adesivo--dx {
+  top: -14px;
+  right: -30px;
+  transform: rotate(18deg);
+  background: rgba(255, 51, 102, 0.85);
+}
+.locandina {
+  position: relative;
+  background: #fff;
+  border: 5px solid #000;
+  box-shadow: 12px 12px 0 0 #000;
+  padding: 0 0 30px;
+}
+.locandina-testata {
+  margin: 0 0 26px;
+  padding: 14px 24px 12px;
+  background: #000;
+  color: #fff;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+}
+.locandina-titolo {
+  margin: 0 24px 22px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  font-size: clamp(54px, 6vw, 96px);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+}
+.locandina-titolo span {
+  display: block;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 5px solid #000;
+  font-size: 0.48em;
+  line-height: 0.95;
+}
+.locandina-testo {
+  margin: 0 24px;
+  font-size: 18px;
+  font-weight: 700;
+  max-width: 40ch;
+}
+
+/* ------------------------------------------------------------------
+   ORARI (dentro Dove siamo)
+   ------------------------------------------------------------------ */
+.orari {
+  max-width: 560px;
+  margin: 0 0 40px;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 18px;
+  box-shadow: 8px 8px 0 0 #000;
+  padding: 20px 24px 22px;
+}
+.orari-testa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.orari-titolo {
+  margin: 0;
+  font-size: 30px;
+}
+.orari-stato {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 14px;
+  border: 3px solid #000;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 15px;
+}
+.orari-stato.is-aperto {
+  background: #00ff66;
+}
+.orari-stato.is-chiuso {
+  background: #ff3366;
+}
+.orari-pallino {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #000;
+}
+.orari-lista {
+  margin: 0;
+}
+.orari-lista div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 3px dashed #000;
+  font-size: 19px;
+}
+.orari-lista dt {
+  font-weight: 900;
+}
+.orari-lista dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ------------------------------------------------------------------
+   Responsive (desktop-first)
+   ------------------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .scheda-aperta {
+    grid-template-columns: 1fr;
+    padding: 90px 32px 40px;
+    gap: 20px;
+  }
+  .aperta-media {
+    min-height: 300px;
+  }
+  .aperta-img {
+    max-height: 300px;
+  }
+  .dove-griglia {
+    grid-template-columns: 1fr;
+  }
+  .adesivo {
+    right: -10px;
+    width: 150px;
+  }
+  .servizi-griglia {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .chi-griglia {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 900px) {
+  .griglia {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .scheda {
+    grid-column: span 2 / span 2 !important;
+  }
+  .griglia-intro,
+  .servizi-intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 40px;
+  }
+  .hero-nav .pill {
+    display: none;
+  }
+  .hero-titolo {
+    position: relative;
+    inset: auto;
+    padding: 16px var(--pad) 0;
+    font-size: clamp(48px, 15vw, 90px);
+  }
+  .riga {
+    position: relative;
+    inset: auto;
+    text-align: left;
+  }
+  .hero-sotto {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    max-width: none;
+    margin: 16px var(--pad) 0;
+  }
+  .palco {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    padding: 24px var(--pad) 0;
+  }
+  .palco-burst {
+    width: 90%;
+    left: 5%;
+    top: 10px;
+    margin: 0;
+  }
+  .palco-chiosco {
+    position: relative;
+    height: 360px;
+  }
+  .chiosco-img {
+    max-width: 80%;
+  }
+  .badge-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 28px;
+  }
+  .badge-posto {
+    position: relative;
+    inset: auto;
+  }
+  .badge-nome {
+    font-size: 15px;
+  }
+  .badge-img {
+    width: 40px;
+    height: 40px;
+  }
+  .scheda-media {
+    height: 220px;
+  }
+  .strappo {
+    height: 64px;
+    top: -34px;
+  }
+  .piede-riga {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .servizi-griglia,
+  .contatti-lista {
+    grid-template-columns: 1fr;
+  }
+  .servizio--largo {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .orari-lista div {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .orari-lista dd {
+    text-align: left;
+  }
+}
