@@ -16,6 +16,12 @@
   --font-body: Archivo, 'Helvetica Neue', Arial, sans-serif;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden; /* fallback per browser datati */
+  overflow-x: clip;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -278,6 +284,7 @@ img {
    ------------------------------------------------------------------ */
 .griglia-sezione {
   position: relative;
+  overflow-x: clip; /* il bordo strappato è più largo della pagina */
   background: var(--carta);
   padding: 150px 0 140px;
 }
@@ -313,6 +320,12 @@ img {
   font-weight: 700;
 }
 
+.griglia > *,
+.dove-griglia > *,
+.chi-griglia > *,
+.servizi-griglia > * {
+  min-width: 0;
+}
 .griglia {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1162,5 +1175,356 @@ img {
   }
   .orari-lista dd {
     text-align: left;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Telefono: tutto più compatto, meno scorrimento
+   ------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+  }
+  :root {
+    --pad: 18px;
+  }
+
+  /* Hero */
+  .wordmark {
+    font-size: 20px;
+  }
+  .hero-nav {
+    padding: 14px var(--pad);
+  }
+  .hero-titolo {
+    font-size: clamp(40px, 13vw, 64px);
+    padding-top: 8px;
+  }
+  .hero-sotto {
+    font-size: 15px;
+    margin-top: 12px;
+  }
+  .palco {
+    padding-top: 12px;
+  }
+  .palco-chiosco {
+    height: 260px;
+  }
+  .badge-lista {
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .badge {
+    gap: 6px;
+    padding: 5px 12px 5px 5px;
+    border-width: 3px;
+    box-shadow: 4px 4px 0 0 var(--line);
+  }
+  .badge-img {
+    width: 32px;
+    height: 32px;
+    border-width: 2px;
+  }
+  .badge-nome {
+    font-size: 12px;
+  }
+
+  /* Griglia categorie */
+  .griglia-sezione {
+    padding: 80px 0 72px;
+  }
+  .strappo {
+    height: 48px;
+    top: -26px;
+  }
+  .griglia-intro,
+  .servizi-intro {
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .griglia-titolo,
+  .servizi-titolo {
+    font-size: clamp(38px, 11vw, 54px);
+  }
+  .griglia-sotto,
+  .servizi-sotto {
+    font-size: 16px;
+  }
+  .griglia {
+    gap: 18px;
+  }
+  .scheda {
+    border-width: 3px;
+  }
+  .scheda-media {
+    height: 170px;
+    border-bottom-width: 3px;
+  }
+  .scheda-testo {
+    gap: 8px;
+    padding: 16px 18px 18px;
+  }
+  .scheda-titolo {
+    font-size: 24px;
+  }
+  .scheda-breve {
+    font-size: 15px;
+  }
+  .scheda-apri {
+    font-size: 14px;
+    padding-top: 4px;
+  }
+  .scheda-piu {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+  }
+  .scheda-aperta {
+    padding: 76px 18px 26px;
+    gap: 12px;
+    min-height: 0;
+  }
+  .aperta-media {
+    min-height: 200px;
+  }
+  .aperta-img {
+    max-height: 200px;
+  }
+  .aperta-titolo {
+    font-size: clamp(32px, 9vw, 44px);
+    margin-bottom: 14px;
+  }
+  .aperta-lungo {
+    font-size: 16px;
+  }
+  .aperta-voci li {
+    font-size: 15px;
+  }
+  .chiudi {
+    top: 14px;
+    right: 14px;
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+    font-size: 22px;
+    box-shadow: 4px 4px 0 0 #000;
+  }
+
+  /* Servizi */
+  .servizi-sezione {
+    padding: 72px 0 80px;
+  }
+  .servizi-griglia {
+    gap: 16px;
+  }
+  .servizio,
+  .servizio--largo {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border-width: 3px;
+    border-radius: 16px;
+  }
+  .servizio-segno,
+  .servizio--largo .servizio-segno {
+    width: 58px;
+    height: 58px;
+    border-width: 3px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 0 #000;
+  }
+  .servizio-segno svg {
+    width: 40px;
+    height: 40px;
+  }
+  .servizio--largo .servizio-segno {
+    width: 86px;
+  }
+  .servizio-nome,
+  .servizio--largo .servizio-nome {
+    font-size: 19px;
+    margin-bottom: 6px;
+  }
+  .servizio-testo {
+    font-size: 14px;
+  }
+  .servizio-nota {
+    font-size: 12px;
+  }
+
+  /* Chi siamo */
+  .chi-sezione {
+    padding: 72px 0 80px;
+  }
+  .chi-griglia {
+    gap: 40px;
+  }
+  .chi-foto {
+    padding: 10px 10px 0;
+    box-shadow: 8px 8px 0 0 #000;
+  }
+  .chi-foto figcaption {
+    font-size: 14px;
+    padding: 10px 2px 12px;
+  }
+  .nastro-adesivo {
+    width: 96px;
+    height: 28px;
+  }
+  .nastro-adesivo--sx {
+    left: -14px;
+  }
+  .nastro-adesivo--dx {
+    right: -12px;
+  }
+  .locandina {
+    box-shadow: 8px 8px 0 0 #000;
+    border-width: 4px;
+    padding-bottom: 20px;
+  }
+  .locandina-testata {
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding: 10px 16px 8px;
+  }
+  .locandina-titolo {
+    margin: 0 16px 14px;
+    font-size: clamp(38px, 11vw, 52px);
+  }
+  .locandina-testo {
+    margin: 0 16px;
+    font-size: 15px;
+  }
+
+  /* Dove siamo */
+  .dove-sezione {
+    padding: 72px 0 80px;
+  }
+  .dove-griglia {
+    gap: 48px;
+  }
+  .dove-titolo {
+    font-size: clamp(40px, 12vw, 58px);
+    margin-bottom: 20px;
+  }
+  .targa {
+    font-size: 30px;
+    padding: 8px 18px 10px;
+    border-width: 4px;
+    margin-bottom: 22px;
+    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #000, 5px 5px 0 0 #000;
+  }
+  .orari {
+    max-width: 100%;
+    margin-bottom: 26px;
+    padding: 14px 16px 12px;
+    border-width: 3px;
+    border-radius: 14px;
+    box-shadow: 5px 5px 0 0 #000;
+  }
+  .orari-titolo {
+    font-size: 22px;
+  }
+  .orari-stato {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-width: 2px;
+  }
+  .orari-pallino {
+    width: 9px;
+    height: 9px;
+  }
+  .orari-lista div {
+    font-size: 15px;
+    padding: 8px 0;
+    border-top-width: 2px;
+  }
+  .btn-cta {
+    font-size: 22px;
+    padding: 14px 24px 12px;
+    border-width: 4px;
+    border-radius: 14px;
+  }
+  .mappa {
+    height: 280px;
+    border-width: 4px;
+    border-radius: 16px;
+    box-shadow: 7px 7px 0 0 #000;
+  }
+  .adesivo {
+    width: 96px;
+    top: -34px;
+    right: -6px;
+  }
+  .adesivo span {
+    font-size: 13px;
+    max-width: 56px;
+  }
+
+  /* Footer */
+  .piede {
+    padding: 44px 0 26px;
+  }
+  .nastro {
+    padding: 12px 0 8px;
+    border-width: 4px 0;
+  }
+  .nastro-parola {
+    font-size: 30px;
+  }
+  .piede-corpo {
+    padding-top: 48px;
+  }
+  .contatti {
+    margin-bottom: 48px;
+  }
+  .contatti-titolo {
+    font-size: 28px;
+    margin-bottom: 18px;
+  }
+  .contatti-lista {
+    gap: 16px;
+  }
+  .piede a.contatto {
+    padding: 14px 16px 16px;
+    gap: 6px;
+    border-width: 3px;
+    border-radius: 14px;
+    box-shadow: 5px 5px 0 0 #fff;
+  }
+  .contatto-etichetta {
+    font-size: 13px;
+  }
+  .contatto-valore {
+    font-size: 26px;
+  }
+  .contatto-valore--mail {
+    font-size: 16px;
+  }
+  .piede-marchio {
+    font-size: clamp(40px, 14vw, 64px);
+    padding-bottom: 16px;
+    border-bottom-width: 4px;
+  }
+  .piede-riga {
+    gap: 16px;
+    padding-top: 16px;
+    font-size: 14px;
+  }
+  /* I quattro link del footer: stessa distanza tra uno e l'altro */
+  .piede-link {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .piede-link a {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 359px) {
+  .piede-riga {
+    font-size: 12.5px;
   }
 }
