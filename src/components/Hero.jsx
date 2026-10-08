@@ -90,10 +90,34 @@ export default function Hero({ onScegli }) {
         </span>
       </h1>
 
-      <p className="hero-sotto">
-        Non solo notizie. Carte, figurine, pagamenti pagoPA e il giornale del mattino. Aperti
-        tutti i giorni dalle 6:45.
-      </p>
+      <div className="hero-angolo">
+        {/* Gli edicolanti, subito in vista: piccola polaroid che porta a "Chi siamo" */}
+        <motion.a
+          href="#chi-siamo"
+          className="hero-polaroid"
+          aria-label="Adriano e Roberto, i tuoi edicolanti di fiducia: scopri chi siamo"
+          initial={{ scale: 0.4, rotate: -24, opacity: 0 }}
+          animate={{
+            scale: 1,
+            rotate: -6,
+            opacity: 1,
+            transition: { type: 'spring', stiffness: 300, damping: 16, delay: 0.25 },
+          }}
+          whileHover={{ rotate: 0, scale: 1.06 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 18 }}
+        >
+          <span className="hero-polaroid-nastro" aria-hidden="true" />
+          <img src={ASSETS.foto} alt="" draggable="false" />
+          <span className="display hero-polaroid-nome">Adriano &amp; Roberto</span>
+          <span className="hero-polaroid-ruolo">i tuoi edicolanti di fiducia</span>
+        </motion.a>
+
+        <p className="hero-sotto">
+          Non solo notizie. Carte, figurine, pagamenti pagoPA e il giornale del mattino. Aperti
+          tutti i giorni dalle 6:45.
+        </p>
+      </div>
 
       <div className="palco">
         {/* Esplosione fumetto dietro al chiosco, con un leggero parallasse */}

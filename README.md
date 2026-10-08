@@ -16,7 +16,8 @@ npm run preview  # anteprima della build
 
 1. **Hero interattivo**: chiosco al centro che si inclina verso il cursore, cinque badge
    attorno. Al passaggio sul badge lo sfondo taglia di netto sul colore della categoria;
-   al click si apre la scheda corrispondente nella griglia.
+   al click si apre la scheda corrispondente nella griglia. In basso a sinistra, una piccola
+   polaroid di Adriano e Roberto porta alla sezione "Chi siamo".
 2. **Griglia categorie**: schede con espansione sul posto (`layout` + `layoutId` di
    Framer Motion). Chiusura con il pulsante (X) o con Esc.
 3. **Servizi**: bollettini pagoPA, bollo auto, ricariche telefoniche e conto gioco,
