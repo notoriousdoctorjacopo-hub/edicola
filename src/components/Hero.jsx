@@ -11,11 +11,11 @@ import { ASSETS } from '../assets.js'
 
 // Posizione di ogni badge attorno al chiosco (in % del palco)
 const POSIZIONI = {
-  pokemon: { top: '6%', left: '0%', rot: -8 },
-  giochi: { top: '2%', right: '2%', rot: 6 },
-  figurine: { top: '46%', left: '-6%', rot: 5 },
-  riviste: { bottom: '4%', left: '8%', rot: -5 },
-  gratta: { bottom: '12%', right: '-4%', rot: 7 },
+  pokemon: { top: '0%', left: '4%', rot: -8 },
+  giochi: { top: '0%', right: '4%', rot: 6 },
+  figurine: { top: '44%', left: '-8%', rot: 5 },
+  gratta: { top: '40%', right: '-8%', rot: 7 },
+  riviste: { bottom: '0%', left: '30%', rot: -4 },
 }
 
 const molla = { type: 'spring', stiffness: 520, damping: 22 }
@@ -141,7 +141,7 @@ export default function Hero({ onScegli }) {
         >
           <motion.img
             src={ASSETS.chiosco}
-            alt="Chiosco dell'edicola con tenda a righe rosa e gialle e scaffali pieni di riviste"
+            alt="L'Edicola Galli disegnata in stile cartoon: chiosco basso con tenda beige e vetrine piene di riviste e giochi"
             className="contorno-ombra chiosco-img"
             style={{ rotateX: rotX, rotateY: rotY }}
             draggable="false"

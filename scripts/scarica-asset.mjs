@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 
 const CDN = 'https://d2ol7oe51mr4n9.cloudfront.net/user_3Jm6LqKnULj74tXpB3Qe7ofeqIb'
 const MEDIA_ID = {
-  chiosco: '71ad1b54-06af-42a7-86e8-e5209e073d95',
+  chiosco: '3365e3be-895c-47bd-abcb-a11a228b6dcb',
   giochi: '995c75c5-f03b-48f1-96f8-db4820218bd3',
   riviste: '4ac2068f-c23d-403f-af5a-d6cc29122d99',
   burst: 'f0f0373d-02d4-4267-bfbc-48d3762ba923',

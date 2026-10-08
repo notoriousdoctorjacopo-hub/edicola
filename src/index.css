@@ -271,17 +271,10 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 78%;
-  max-width: 640px;
-  margin-left: -39%;
-  margin-top: -27%;
+  width: 66%;
+  margin-left: -33%;
+  margin-top: -25.5%;
   pointer-events: none;
-}
-@media (min-width: 1260px) {
-  .palco-burst {
-    margin-left: -320px;
-    margin-top: -220px;
-  }
 }
 .palco-chiosco {
   position: absolute;
@@ -293,9 +286,10 @@ img {
   pointer-events: none;
 }
 .chiosco-img {
-  height: 100%;
-  width: auto;
-  max-width: 60%;
+  /* il chiosco è largo e basso (proporzioni 2:1) */
+  width: 76%;
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
   transform-style: preserve-3d;
   will-change: transform;
@@ -1188,10 +1182,11 @@ img {
   }
   .palco-chiosco {
     position: relative;
-    height: 360px;
+    height: auto;
+    padding: 16px 0 6px;
   }
   .chiosco-img {
-    max-width: 80%;
+    width: 100%;
   }
   .badge-lista {
     display: flex;
@@ -1291,7 +1286,7 @@ img {
     padding-top: 12px;
   }
   .palco-chiosco {
-    height: 260px;
+    padding-top: 10px;
   }
   .badge-lista {
     gap: 10px;
